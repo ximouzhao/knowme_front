@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-//import './App.css';
+import './App.css';
 import Button from 'antd/lib/button';
 import ReactMarkdown from 'react-markdown';
 import { Input } from 'antd';
 import CodeBlock from './CodeBlock';
 import sampleCode from './data/code';
+import {getData} from './test/test';
 
 class App extends Component {
 
   state ={value:sampleCode};
+componentDidMount(){
+  getData();
 
+}
   hanldleTextAreaChange=(event)=>{
     if(event && event.target && event.target.value){
       let value=event.target.value;
