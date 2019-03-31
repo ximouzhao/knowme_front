@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import Button from 'antd/lib/button';
+import ReactMarkdown from 'react-markdown';
+import { Input } from 'antd';
+import CodeBlock from './CodeBlock';
+import sampleCode from './data/code';
 
 class App extends Component {
+
+  state ={value:sampleCode};
+
+  hanldleTextAreaChange=(event)=>{
+    if(event && event.target && event.target.value){
+      let value=event.target.value;
+      console.log(value);
+      this.setState(()=>({value:value}));
+    }
+  };
   render() {
+    const { TextArea } = Input;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Button type="primary">保存</Button>
+        <TextArea rows={4} onChange={event=>this.hanldleTextAreaChange(event)} />
+   
+          {React.createElement(ReactMarkdown, {
+            source: this.state.value,
+            renderers: {
+              code: CodeBlock
+            }
+          })}
+        <ReactMarkdown source={this.state.value}  renderers={{
+            code: CodeBlock
+        }}/>
+<ReactMarkdown source={this.state.value}  renderers={{ code: CodeBlock }}/>
+        <ReactMarkdown source={this.state.value}  renderers={{ code: CodeBlock }}/>
       </div>
     );
   }

@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.5",
+    "antd": "^3.15.2",
+    "babel-plugin-import": "^1.11.0",
+    "create-react-class": "^15.6.3",
+    "customize-cra": "^0.2.12",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "react": "^16.8.6",
+    "react-app-rewired": "^2.1.1",
     "react-dom": "^16.8.5",
-    "react-scripts": "2.1.8"
+    "react-markdown": "^4.0.6",
+    "react-scripts": "2.1.8",
+    "react-syntax-highlighter": "^10.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "prop-types": "^15.7.2"
+  }
 }
