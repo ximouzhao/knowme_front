@@ -1,0 +1,26 @@
+@import '~antd/dist/antd.css';
+
+.messageBoard{
+  /* background:url("resource/body_bg.jpg")  no-repeat top center; */
+  
+  margin: 10px 0 0 30px;
+  display: block;
+  text-align: center;
+  top:40px;
+}
+.messageBoard img {
+  display: block;
+  height: auto;
+  max-width: 100%;  
+}
+
+.editArea{
+  display:inline-block;
+    margin:30px 0 30px 0;
+    width: 80%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

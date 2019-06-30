@@ -1,0 +1,13 @@
+.search{
+    width: 500px;
+    margin:5px 200px 0 ;
+    float: right;
+}
+
+.headerPic{
+    margin-left: 50px;
+    float: left;
+    height: 40px;
+    display: block;
+    max-width: 100%;  
+}
