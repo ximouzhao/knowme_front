@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './MessageBoard.css';
 import { Input } from 'antd';
 import MessageList from './MessageList';
+import DocumentType from  '../../Constant/DocumentType';
 import {
   Upload, message, Button, Icon,
 } from 'antd';
@@ -49,8 +50,9 @@ class MessageBoard extends Component {
   //state状态 value值得是
   state ={txtValue:'',list:[]};
   
-  saveArticle=(txtValue)=>{
-    let url='/api/article/add_article?'+this.changeJSON2QueryString({content:txtValue});
+  saveDocument=(txtValue)=>{
+    console.log(DocumentType.MESSAGE);
+    let url=`/api/document/add_document?type=${DocumentType.MESSAGE}`+this.changeJSON2QueryString({content:txtValue});
     fetch(url).then(res=>{
       message.success('成功发表留言');
       this.setState({txtValue:''});
@@ -74,7 +76,7 @@ class MessageBoard extends Component {
   handleSaveButtonClick=(event)=>{
     console.log('button click');
     if(event && event.target ){
-      this.saveArticle(this.state.txtValue);
+      this.saveDocument(this.state.txtValue);
     }
   };
 componentDidMount(){
@@ -82,7 +84,7 @@ componentDidMount(){
 
 };
 getListData=()=>{
-    fetch('/api/article/list').then(response=>{
+    fetch(`/api/document/findbytype?type=${DocumentType.MESSAGE}`).then(response=>{
       if(response.ok){
           return response.json();
       }else{

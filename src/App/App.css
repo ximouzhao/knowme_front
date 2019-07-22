@@ -1,5 +1,11 @@
 @import '~antd/dist/antd.css';
 
+@keyframes myfirst
+{
+from {background: red;}
+to {background: yellow;}
+}
+
 /* 使图片自适应浏览器的宽度 */
 .background{
   background-color:#fff;

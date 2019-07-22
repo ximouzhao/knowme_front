@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import ArticleContent from './ArticleContent'
+import DocumentContent from './DocumentContent'
 import { message} from 'antd';
-import './ArticleList.css';
+import './DocumentList.css';
 
 class Article extends Component{
     componentDidMount(){

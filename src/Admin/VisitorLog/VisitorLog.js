@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Table from 'antd/lib/table';
-import './VisitorLogList.css';
+import './VisitorLog.css';
 import { message} from 'antd';
 class VisitorLogList extends Component{
     componentDidMount(){
@@ -42,18 +42,18 @@ class VisitorLogList extends Component{
               key: 'clientIp',
             },
             {
-              title: 'classMethod',
+              title: '访问方法',
               dataIndex: 'classMethod',
               key: 'classMethod',
             },
             {
-              title: 'startTime',
+              title: '访问时间',
               dataIndex: 'startTime',
               key: 'startTime',
               width: 180,
             },
             {
-                title: 'clientIpInfo',
+                title: 'IP信息',
                 dataIndex: 'clientIpInfo',
                 key: 'clientIpInfo.city',
               },

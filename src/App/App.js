@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Input } from 'antd';
+import { Input ,BackTop} from 'antd';
 import MainLeftMenu from './Menu/MainLeftMenu';
 import MessageBoard from './MessageBoard/MessageBoard';
 import Header from './Header/Header';
@@ -11,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="background">
+        <BackTop stype={{color:'#ff4d4f'}}/>
         <div className="App-header"><Header/></div>
         <div className="main-left"><MainLeftMenu/></div>
         <div className="main-right">
