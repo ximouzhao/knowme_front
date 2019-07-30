@@ -6,6 +6,7 @@ import MessageBoard from './MessageBoard/MessageBoard';
 import Header from './Header/Header';
 import { BrowserRouter,Route } from 'react-router-dom';
 import Home from './Home/Home';
+import ArticleList from './Article/ArticleList';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
               <Route exact path={`${this.props.match.path}`} component={Home}/>
               <Route path={`${this.props.match.path}/home`} component={Home}/>
               <Route path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
+              <Route path={`${this.props.match.path}/article`} component={ArticleList}/>
         </div>
       </div>
     );

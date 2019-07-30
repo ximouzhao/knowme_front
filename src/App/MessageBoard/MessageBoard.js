@@ -52,7 +52,7 @@ class MessageBoard extends Component {
   
   saveDocument=(txtValue)=>{
     console.log(DocumentType.MESSAGE);
-    let url=`/api/document/add_document?type=${DocumentType.MESSAGE}`+this.changeJSON2QueryString({content:txtValue});
+    let url=`/api/document/add_document?type=${DocumentType.ARTICLE}&`+this.changeJSON2QueryString({content:txtValue});
     fetch(url).then(res=>{
       message.success('成功发表留言');
       this.setState({txtValue:''});

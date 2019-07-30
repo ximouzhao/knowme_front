@@ -4,6 +4,7 @@ import CodeBlock from '../../Tools/CodeBlock';
 import { Icon } from 'antd';
 import './MessageContent.css';
 import headPtoto from '../../resource/head_photo.png';
+import IconComment from '../../Icon/IconComment';
 
 class MessageContent extends Component{
 
@@ -20,8 +21,8 @@ class MessageContent extends Component{
                     <ReactMarkdown className="markdown" source={this.props.element.content}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
                 </div>
                 <div className="handle">
-                    <div className="comment"><Icon type="message" />  评论</div>
-                    <div className="like"><Icon type="heart" />  点赞</div>
+                    <div className="comment"><IconComment type="iconcomment" />  评论</div>
+                    <div className="like"><Icon type="like" />  点赞</div>
                 </div>
             </div>
         );

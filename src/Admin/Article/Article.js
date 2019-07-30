@@ -1,92 +1,123 @@
 import React, { Component } from 'react';
-import { Table, Divider, Tag,Button  } from 'antd';
-
-const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a href="javascript:;">{text}</a>,
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: tags => (
-        <span>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <a href="javascript:;">Invite {record.name}</a>
-          <Divider type="vertical" />
-          <a href="javascript:;">Delete</a>
-        </span>
-      ),
-    },
-  ];
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },                                                                         
-  ];
+import { Table, Divider, Tag ,Popconfirm} from 'antd';
+import DocumentType from  '../../Constant/DocumentType';
+import { message} from 'antd';
+import WrapFetch from '../../Tools/WrapFetch';
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../../Tools/CodeBlock';
   
 class Article extends Component{
-    onNew=(event)=>{
-      console.log(event);
-    }; 
+    
+  componentDidMount(){
+    this.getListData();
+  };
+  state={list:[],loading:true};
+  getListData=()=>{
+      this.setState({loading:{tip:'正在加载...',spinning:true}});
+      WrapFetch.get(`/api/document/findbytype?type=${DocumentType.ARTICLE}`,
+        (data)=>{
+          this.setState({loading:false,list:data});
+        }
+      );
+      
+  };
     render(){
-        return (
-          <div>
-            <Button onClick={this.onNew} type="primary" style={{float:'right',marginBottom:'20px'}} onClick={this.onNew}>新增</Button>
-            <div style={{clear:"both"}}>
-              <Table columns={columns} dataSource={data} loading={false}/>
-            </div>
-          </div>
-        );
+      let columns = [
+        {
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+        },
+        {
+          title: '标题',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: '内容',
+          dataIndex: 'content',
+          key: 'content',
+          render: (text, record) => {
+            return (
+              <ReactMarkdown className="markdown" source={text.substring(0, 20)}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
+            )
+          },
+        },
+        {
+          title: '时间戳',
+          dataIndex: 'ts',
+          key: 'ts',
+        },
+        {
+          title: 'Tags',
+          key: 'tags',
+          dataIndex: 'tags',
+          render: tags =>{
+            if(!tags){
+              tags=['tags1','tags2'];
+            }
+            return (
+              <span>
+                {
+                  
+                  tags.map(tag => {
+                    let color = tag.length > 5 ? 'geekblue' : 'green';
+                    if (tag === 'loser') {
+                      color = 'volcano';
+                    };
+                    return (
+                      <Tag color={color} key={tag}>
+                        {tag.toUpperCase()}
+                      </Tag>
+                    );
+                  })
+                }
+              </span>
+            )
+          } 
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => {
+            let handleUpdate = (e)=>  {
+              e.preventDefault();
+              console.log(record);
+              // WrapFetch.get(`/api/document/updateById?id=${record.id}`,
+              //   (data)=>{
+              //     this.setState({loading:false,list:data});
+              //   }
+              // );
+            };
+            let handleDelete = (e)=>  {
+              e.preventDefault();
+              console.log(record);
+              this.setState({loading:{tip:'正在删除...',spinning:true}});
+              WrapFetch.get(`/api/document/deletebyid?id=${record.id}`,
+                (data)=>{
+                  this.getListData();
+                }
+              );
+            };
+            return (
+              <span>
+                <a href="javascript:" onClick={handleUpdate}>修改</a>
+                <Divider type="vertical" />
+                <Popconfirm
+                  placement="topRight"
+                  title="确认删除此条数据？"
+                  onConfirm={handleDelete}
+                  okText="是"
+                  cancelText="否"
+                >
+                  <a href="javascript:;" >删除</a>
+                </Popconfirm>
+              </span>
+            )
+          },
+        },
+      ];
+        return (<div><Table columns={columns} dataSource={this.state.list} rowKey="id" loading={this.state.loading}/></div>);
     };
 }
 

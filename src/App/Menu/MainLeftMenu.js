@@ -51,10 +51,12 @@ class MainLeftMenu extends Component{
                     </span>
               </Menu.Item>
               <Menu.Item key="3">
+                  <Link to="/app/article">
                     <span>
                       <Icon type="read" />
                       <span>文章</span>
                     </span>
+                  </Link>
               </Menu.Item>
               <Menu.Item key="4">
                 <a href="https://github.com/ximouzhao" target="_blank" rel="noopener noreferrer">
