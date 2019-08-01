@@ -45,10 +45,12 @@ class MainLeftMenu extends Component{
                     
               </Menu.Item>
               <Menu.Item key="2">
-                    <span>
+                <Link to="/app/think">
+                <span>
                       <Icon type="bulb" />
                       <span>随想</span>
                     </span>
+                </Link>
               </Menu.Item>
               <Menu.Item key="3">
                   <Link to="/app/article">

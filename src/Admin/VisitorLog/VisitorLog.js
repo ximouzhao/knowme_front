@@ -2,36 +2,19 @@ import React,{Component} from 'react';
 import Table from 'antd/lib/table';
 import './VisitorLog.css';
 import { message} from 'antd';
+import WrapFetch from '../../Tools/WrapFetch';
 class VisitorLogList extends Component{
     componentDidMount(){
         this.getListData();
     };
-    state={list:[]};
+    state={list:[],loading:true};
     getListData=()=>{
-        fetch('/api/visitor_log/list').then(
-            response=>{
-                if(response.ok){
-                    return response.json();
-                }else{
-                    message.error(response.statusText);
-                }
+        this.setState({loading:{tip:'正在加载...',spinning:true}});
+        WrapFetch.get(`/api/visitor_log/list`,
+            (data)=>{
+                this.setState({loading:false,list:data});
             }
-        ).then(json =>{
-            try{
-                if(!json){
-                    return ;
-                }
-                if(json.code=='0'){
-                    this.setState({list:json.data});
-                }else{
-                    message.error(json.msg);
-                }
-                
-            }catch(err){
-                message.error(err.message);
-                console.log(err);
-            }
-        })
+        );
     };
     
     render(){
@@ -63,7 +46,7 @@ class VisitorLogList extends Component{
         // this.state.list.forEach((element,index,array )=> {
         //     visitor_log_list.push(<div key={index}>{JSON.stringify(element)}</div>)
         // });
-        return <div className="VisitorLogList"><Table dataSource={this.state.list} columns={columns} rowKey="id" /></div>;
+        return <div className="VisitorLogList"><Table dataSource={this.state.list} columns={columns} rowKey="id" loading={this.state.loading}/></div>;
     }
 }
 

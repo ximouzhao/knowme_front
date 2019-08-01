@@ -7,7 +7,7 @@ import { message} from 'antd';
 
 class Article extends Component{
     state={list:[{title:'1',content:'1'},{title:'2',content:'2'},{title:'3',content:'3'},{title:'4',content:'4'}],
-    loading:false};
+    loading:true};
     componentDidMount(){
       this.getListData();
     }
@@ -25,11 +25,12 @@ class Article extends Component{
     };
      
     render(){
+      console.log(this.props.location)
       let ArticleContents=[];
       this.state.list.forEach((element,index,array)=>{
           try{
               element.content=decodeURIComponent(element.content);
-              ArticleContents.push(<ArticleContent element={element}  key={index} loading={this.state.loading}/>);
+              ArticleContents.push(<ArticleContent element={element}  key={index} loading={this.state.loading} location={this.props.location.pathname}/>);
           }catch(err){
               message.error(err+'');
           }

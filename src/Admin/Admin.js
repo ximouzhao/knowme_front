@@ -47,6 +47,7 @@ class Admin extends Component{
     };
     generatorBreadcrumbItems(){
         const { location } = this.props;
+        console.log(this.props);
         const pathSnippets = location.pathname.replace('/admin','').split('/').filter(i => i);
         const extraBreadcrumbItems = pathSnippets.map((value, index) => {
           const url = `/admin/${pathSnippets.slice(0, index + 1).join('/')}`;

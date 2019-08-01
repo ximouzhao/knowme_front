@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../Tools/CodeBlock';
-import IconComment from '../../Icon/IconComment';
 
 const { Meta } = Card;
 
 class ArticleContent extends Component{
     render(){
+      console.log(this.props);
         return (
             <div>
             <Card
               style={{ marginTop: 20,marginBottom:20,background:'#fff' }}
-            //   actions={[<IconComment type="iconcomment" />, <Icon type="like" />]}
+            
             >
               <Skeleton loading={this.props.loading}  active>
                 <div>
@@ -23,7 +23,7 @@ class ArticleContent extends Component{
                         source={this.props.element.content.substring(0, 200)} 
                         escapeHtml={false} 
                         renderers={{ code: CodeBlock }}/>
-                        <Link to={this.props.name}>阅读全文</Link>
+                        <Link to={this.props.location+`/details/${this.props.element.id}`}>阅读全文</Link>
                     </p>
                 </div>
               </Skeleton>

@@ -7,48 +7,43 @@ import {
   Upload, message, Button, Icon,
 } from 'antd';
 
+
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+function beforeUpload(file) {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'|| file.type === 'image/jpg';
+  if (!isJpgOrPng) {
+    message.error('文件类型必须是 JPG或者PNG !');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 10;
+  if (!isLt2M) {
+    message.error('图像大小必须小于10MB!');
+  }
+  return isJpgOrPng && isLt2M;
+}
 class MessageBoard extends Component {
 
-  //文件上传组件
-  uploadProps = {
-    accept: '.png, .jpg, .jpeg',
-    name: 'file',
-    action: '/api/file/upload',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange:(info)=> {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-  uploadMp3Props = {
-    accept: '.mp3',
-    name: 'file',
-    action: '/api/file/upload',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange:(info)=> {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-        this.getListData();
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
   //state状态 value值得是
-  state ={txtValue:'',list:[]};
+  state ={txtValue:'',list:[],loading: false,};
+  handleChange = info => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, imageUrl =>
+        this.setState({
+          imageUrl,
+          loading: false,
+        }),
+      );
+    }
+  };
+
   
   saveDocument=(txtValue)=>{
     console.log(DocumentType.MESSAGE);
@@ -75,9 +70,7 @@ class MessageBoard extends Component {
   };
   handleSaveButtonClick=(event)=>{
     console.log('button click');
-    if(event && event.target ){
-      this.saveDocument(this.state.txtValue);
-    }
+    
   };
 componentDidMount(){
     this.getListData();
@@ -103,17 +96,36 @@ getListData=()=>{
   render() {
     const { TextArea } = Input;
     console.log(this.uploadProps);
+
+    const uploadButton = (
+      <div>
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
+        <div className="ant-upload-text">添加图片</div>
+      </div>
+    );
+    const { imageUrl } = this.state;
+
     return (
           <div className="messageBoard">
             <div className="editArea">
                 <TextArea value={this.state.txtValue} rows={4} onChange={event=>this.hanldleTextAreaChange(event)} />
-                <Upload {...this.uploadProps}>
-                <Button>
-                    <Icon type="picture" /> 上传图片
-                </Button>
-                </Upload>
-                <Button type="primary" onClick={event=>this.handleSaveButtonClick(event)}>发表</Button>
-                </div>
+                  <div style={{marginTop:'10px'}}>
+                    <Button type="primary" style={{float:'right',marginRight:'20px'}} onClick={event=>this.handleSaveButtonClick(event)}>发表</Button>
+                    <Upload
+                      name="avatar"
+                      listType="picture-card"
+                      className="avatar-uploader"
+                      showUploadList={false}
+                      action="/api/file/upload"
+                      beforeUpload={beforeUpload}
+                      onChange={this.handleChange}
+                    >
+                      {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                    </Upload>
+                  </div>
+                  
+                
+            </div>
                 <MessageList list={this.state.list}/>
         </div>
     );
