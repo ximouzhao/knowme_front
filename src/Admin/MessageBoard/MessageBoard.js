@@ -32,10 +32,13 @@ class MessageBoard extends Component{
           title: '内容',
           dataIndex: 'content',
           key: 'content',
+          width:'300',
           render: (text, record) => {
             
             return (
-              <ReactMarkdown className="markdown" source={text}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
+              <div style={{width:'300px',height:'30px',overflow:'hidden'}}>
+                <ReactMarkdown className="markdown" source={text.substr(0,300)}  escapeHtml={false} renderers={{ code: CodeBlock }}/> 
+              </div>
             )
           },
           width: 1000,

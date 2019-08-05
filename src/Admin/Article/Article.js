@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { Table, Divider, Tag ,Popconfirm} from 'antd';
+import { Table, Divider, Tag ,Popconfirm, Form, Row, Col, Input, Button, Icon } from 'antd';
 import DocumentType from  '../../Constant/DocumentType';
 import { message} from 'antd';
 import WrapFetch from '../../Tools/WrapFetch';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../Tools/CodeBlock';
+import WrappedAdvancedSearchForm from './WrappedAdvancedSearchForm';
   
 class Article extends Component{
     
+  state={list:[],loading:true};
+  
   componentDidMount(){
     this.getListData();
   };
-  state={list:[],loading:true};
   getListData=()=>{
       this.setState({loading:{tip:'正在加载...',spinning:true}});
       WrapFetch.get(`/api/document/findbytype?type=${DocumentType.ARTICLE}`,
@@ -39,7 +41,10 @@ class Article extends Component{
           key: 'content',
           render: (text, record) => {
             return (
-              <ReactMarkdown className="markdown" source={text.substring(0, 20)}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
+              <div>
+                <ReactMarkdown className="markdown" source={text.substring(0, 20)}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
+              </div>
+              
             )
           },
         },
@@ -117,7 +122,11 @@ class Article extends Component{
           },
         },
       ];
-        return (<div><Table columns={columns} dataSource={this.state.list} rowKey="id" loading={this.state.loading}/></div>);
+        return (
+          <div>
+            <WrappedAdvancedSearchForm history={this.props.history}/>
+            <Table style={{marginTop:20}} columns={columns} dataSource={this.state.list} rowKey="id" loading={this.state.loading}/>
+          </div>);
     };
 }
 

@@ -7,6 +7,7 @@ import './Admin.css';
 import Think from './Think/Think';
 import Article from './Article/Article';
 import MessageBoard from './MessageBoard/MessageBoard';
+import NewArticle from './Article/NewArticle';
 
 const {Header,Content,Footer,Sider} =Layout;
 const {SubMenu} =Menu;
@@ -16,6 +17,7 @@ const breadcrumbNameMap = {
     'article': '文章管理',
     'message':'留言管理',
     'visitor_log': '访问日志',
+    'newArticle':'写文章'
   };
 const minMarginLeft=0;
 const maxMarginLeft=200;
@@ -47,7 +49,6 @@ class Admin extends Component{
     };
     generatorBreadcrumbItems(){
         const { location } = this.props;
-        console.log(this.props);
         const pathSnippets = location.pathname.replace('/admin','').split('/').filter(i => i);
         const extraBreadcrumbItems = pathSnippets.map((value, index) => {
           const url = `/admin/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -59,6 +60,11 @@ class Admin extends Component{
         });
         return extraBreadcrumbItems;
       };
+    getdefaultSelectedKeys(){
+        const { location } = this.props;
+        const pathSnippets = location.pathname.replace('/admin','').split('/').filter(i => i);
+        return pathSnippets;
+    }
     render (){
         return (
             <Layout style={{minHeight:'100vh'}}>
@@ -74,8 +80,8 @@ class Admin extends Component{
                       }}
                 >
                     <div className="logo"/>
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1">
+                    <Menu theme="dark" defaultSelectedKeys={this.getdefaultSelectedKeys()} mode="inline">
+                        <Menu.Item key="home">
                             <Link to={`${this.props.match.path}/home`}>
                             <span>
                                 <Icon type="home" />
@@ -83,28 +89,28 @@ class Admin extends Component{
                             </span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="2">
+                        <Menu.Item key="think">
                             <Link to={`${this.props.match.path}/think`}>
                             <span>
                                 <Icon type="bulb" /><span>随想管理</span>
                             </span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="3">
+                        <Menu.Item key="article">
                             <Link to={`${this.props.match.path}/article`}>
                             <span>
                                 <Icon type="read" /><span>文章管理</span>
                             </span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="4">
+                        <Menu.Item key="message">
                             <Link to={`${this.props.match.path}/message`}>
                             <span>
                                 <Icon type="message" /><span>留言管理</span>
                             </span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="5">
+                        <Menu.Item key="visitor_log">
                             <Link to={`${this.props.match.path}/visitor_log`}>
                             <span>
                                 <Icon type="file-text" /><span>访问日志</span>
@@ -126,13 +132,14 @@ class Admin extends Component{
                         <Breadcrumb style={{margin:'16px 0'}} >
                             {this.generatorBreadcrumbItems()}
                         </Breadcrumb>   
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                        <div style={{ padding: 24, background: '#fff', height: '100%' }}>
                             <Route exact path={`${this.props.match.path}/`} component={Home}/>
-                            <Route path={`${this.props.match.path}/home`} component={Home} />
-                            <Route path={`${this.props.match.path}/think`} component={Think}/>
-                            <Route path={`${this.props.match.path}/article`} component={Article}/>
-                            <Route path={`${this.props.match.path}/message`} component={MessageBoard}/>
-                            <Route path={`${this.props.match.path}/visitor_log`} component={VisitorLog}/>
+                            <Route exact path={`${this.props.match.path}/home`} component={Home} />
+                            <Route exact path={`${this.props.match.path}/think`} component={Think}/>
+                            <Route exact path={`${this.props.match.path}/article`} component={Article}/>
+                            <Route exact path={`${this.props.match.path}/article/newArticle`} component={NewArticle}/>
+                            <Route exact path={`${this.props.match.path}/message`} component={MessageBoard}/>
+                            <Route exact path={`${this.props.match.path}/visitor_log`} component={VisitorLog}/>
                         </div>
                     </Content>
                     <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao</Footer>
