@@ -1,7 +1,6 @@
 import React,{Component} from 'react'
 import { Menu, Icon ,Layout} from 'antd';
 import { BrowserRouter,Route,Link } from 'react-router-dom';
-import logopng from '../../resource/logo.png';
 import './MainLeftMenu.css';
 
 const { SubMenu } = Menu;
@@ -25,18 +24,13 @@ class MainLeftMenu extends Component{
   };
     render(){
         return (
-          <Layout style={{ minHeight: '100vh',background:'#fff' }}>
-            <div className="leftMenuLogoDiv">
-              <img className="leftMenuLogoPic" src={logopng}/>
-            </div>
+          <Layout style={{background:'#fff' }}>
             <Menu
                 mode="inline"
                 openKeys={this.state.openKeys}
                 onOpenChange={this.onOpenChange}
-                style={{ width: 256 }}
               >
               <Menu.Item key="1">
-                  
                     <Link to="/app/home">
                       <span>
                         <Icon type="home" />主页

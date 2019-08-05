@@ -1,8 +1,9 @@
 .leftMenuLogoPic{
+    width: 200;
     height: auto;
     display: block;
     max-width: 100%;  
-    margin: -10px 0 0 0;
+    margin: -3px 0  -4px 0;
 }
 .leftMenuLogoDiv{
     overflow: hidden;

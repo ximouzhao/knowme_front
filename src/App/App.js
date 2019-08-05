@@ -1,31 +1,85 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Input ,BackTop} from 'antd';
+import { BackTop,Layout,Icon,Row, Col} from 'antd';
 import MainLeftMenu from './Menu/MainLeftMenu';
 import MessageBoard from './MessageBoard/MessageBoard';
-import Header from './Header/Header';
+//import Header from './Header/Header';
 import { BrowserRouter,Route,withRouter } from 'react-router-dom';
 import Home from './Home/Home';
 import ArticleList from './Article/ArticleList';
 import ArticleDetails from './Article/details/ArticleDetails';
 import ThinkList from './Think/ThinkList';
+import logopng from '../resource/logo.486a892c.png';
 
+const {Header,Content,Footer,Sider} =Layout;
+const minMarginLeft=0;
+const maxMarginLeft=200;
 class App extends Component {
+
+  state={
+    collapsed:false,
+    rightLayoutStyle:{},
+    padding:"",
+  };
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    let animation=( collapsed)?'rightAreaCollapsed 0.2s':'rightAreaUnCollapsed 0.2s' ;
+    let marginLeft=( collapsed)?minMarginLeft:maxMarginLeft ;
+    console.log(animation);
+    this.setState({ 
+        collapsed,
+        rightLayoutStyle:{marginLeft:marginLeft}
+    });
+  };
+  toggle = () => {
+    console.log(window.innerWidth);
+      let isPhone=window.innerWidth<=768;
+      let collapsed=!this.state.collapsed;
+      let animation=( collapsed)?'rightAreaCollapsed 0.2s':'rightAreaUnCollapsed 0.2s' ;
+      if(isPhone){
+        this.setState({
+          collapsed: collapsed
+      });
+      }else{
+        let marginLeft=( collapsed)?minMarginLeft:maxMarginLeft ;
+        this.setState({
+            collapsed: collapsed,
+            rightLayoutStyle:{animation:animation,marginLeft:marginLeft,animationTimingTunction:'linear'}
+        });
+      }
+  };
   render() {
     return (
-      <div className="background">
+      <Layout style={{minHeight:'100vh'}}>
         <BackTop stype={{color:'#ff4d4f'}}/>
-        <div className="App-header"><Header/></div>
-        <div className="main-left"><MainLeftMenu/></div>
-        <div className="main-right">
-              <Route exact path={`${this.props.match.path}`} component={Home}/>
-              <Route exact path={`${this.props.match.path}/home`} component={Home}/>
-              <Route exact path={`${this.props.match.path}/article`} component={ArticleList}/>
-              <Route path={`${this.props.match.path}/article/details`} component={ArticleDetails}/>
-              <Route exact path={`${this.props.match.path}/think`} component={ThinkList}/>
-              <Route exact path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
-        </div>
-      </div>
+        <Header style={{background:'#ff4d4f',padding:0,position: 'fixed', width: '100%' ,boxShadow:'0 2px 8px rgba(255, 77, 79,0.45)',zIndex: 7}}>
+          <Icon
+                className="appTrigger"
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggle}
+                />
+          <div className="logoDiv">
+                <img className="logoPic" src={logopng}/>
+          </div>
+        </Header>
+        <Sider trigger={null} collapsible collapsed={this.state.collapsed} 
+                    breakpoint="lg" onBreakpoint={this.onCollapse} collapsedWidth={minMarginLeft}
+                    className='appSider'
+                >
+          <MainLeftMenu/>
+        </Sider>
+        <Layout style={this.state.rightLayoutStyle} >
+              <Content className="layoutContent" >
+                <Route exact path={`${this.props.match.path}`} component={Home}/>
+                <Route exact path={`${this.props.match.path}/home`} component={Home}/>
+                <Route exact path={`${this.props.match.path}/article`} component={ArticleList}/>
+                <Route path={`${this.props.match.path}/article/details`} component={ArticleDetails}/>
+                <Route exact path={`${this.props.match.path}/think`} component={ThinkList}/>
+                <Route exact path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
+              </Content>
+              <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao</Footer>
+        </Layout>
+    </Layout>
     );
   }
 }

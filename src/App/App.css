@@ -88,3 +88,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.appSider{
+  overflow:auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  z-index:6;
+  margin-top:64px;
+  background:#fff;
+  border-right:1px solid #e8e8e8;
+}
+.appTrigger {
+  display: inline;
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #fff;
+}
+
+.appTrigger:hover {
+  color: #cf1322;
+}
+.logoPic{
+  width:200px;
+  display: inline;
+  margin: -3px 0  -4px 0;
+}
+.logoDiv{
+  display: inline;
+  width:200px;
+  overflow: hidden;
+}
+.layoutContent{
+  padding: 20px 50px 0 50px;
+  margin-top: 64px;
+  overflow:hidden;
+}
+@media (max-width: 576px) {
+  .layoutContent{
+    padding: 20px 0 0 0;
+  }
+}
+@media  (min-width: 576px) and (max-width: 768px){
+  .layoutContent{
+    padding: 20px 10px 0 10px;
+  }
+}
+@media  (min-width: 768px) and (max-width: 992px){
+  .layoutContent{
+    padding: 20px 20px 0 20px;
+  }
+}
+@media  (min-width: 992px) and (max-width: 1200px ){
+  .layoutContent{
+    padding: 20px 30px 0 30px;
+  }
+}
+@media  (min-width: 1200px) and (max-width: 1600px){
+  .layoutContent{
+    padding: 20px 40px 0 40px;
+  }
+}

@@ -1,10 +1,10 @@
 @keyframes rightAreaCollapsed
 {
-from {margin-left: 200px;}
-to {margin-left: 0;}
+    from {margin-left: 200px;}
+    to {margin-left: 0;}
 }
 @keyframes rightAreaUnCollapsed
 {
-from {margin-left: 0;}
-to {margin-left: 200px;}
+    from {margin-left: 0;}
+    to {margin-left: 200px;}
 }

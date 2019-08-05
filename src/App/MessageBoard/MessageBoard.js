@@ -156,6 +156,7 @@ class MessageBoard extends Component {
     
   };
   publishMessage=async ()=>{
+    this.setState({btnPublishDisabled:true});
     const { fileList ,txtValue} = this.state;
     this.setState({loading:true,tip:'正在上传图片...'})
     await this.handleUpload(fileList);

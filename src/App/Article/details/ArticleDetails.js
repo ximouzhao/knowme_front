@@ -23,7 +23,7 @@ class ArticleDetail extends Component{
     };
     render(){
         return (<div>
-            <Card style={{ marginTop: 16}}>
+            <Card style={{ marginTop: 16,overflow:'hidden'}}>
                 <Skeleton active loading={this.state.loading} style={{height:'800px'}} title={{width:330}} paragraph={{rows:22,width:220}}>
                     <div>
                         <h1>{this.state.data.name}</h1>
