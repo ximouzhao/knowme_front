@@ -17,7 +17,9 @@ class ArticleContent extends Component{
             >
               <Skeleton loading={this.props.loading}  active>
                 <div>
-                    <h3>{this.props.element.name}</h3>
+                    <h1 style={{lineHeight:"30px",fontSize:"25px"}}>{this.props.element.name}</h1>
+                    <h4 style={{color:"rgb(158, 171, 179)"}}>{this.props.element.ts}</h4>
+                    <hr/>
                     <p>
                     <ReactMarkdown className="markdown" 
                         source={this.props.element.content.substring(0, 200)} 

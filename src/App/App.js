@@ -20,6 +20,7 @@ class App extends Component {
     collapsed:false,
     rightLayoutStyle:{},
     padding:"",
+    appContentMaskClassName:"appContentMask",
   };
   onCollapse = collapsed => {
     console.log(collapsed);
@@ -32,19 +33,27 @@ class App extends Component {
     });
   };
   toggle = () => {
-    console.log(window.innerWidth);
       let isPhone=window.innerWidth<=768;
       let collapsed=!this.state.collapsed;
       let animation=( collapsed)?'rightAreaCollapsed 0.2s':'rightAreaUnCollapsed 0.2s' ;
       if(isPhone){
-        this.setState({
-          collapsed: collapsed
-      });
+        if(collapsed){
+          this.setState({
+            collapsed: collapsed,
+            appContentMaskClassName:"appContentMask",
+          });
+        }else{
+          this.setState({
+            collapsed: collapsed,
+            appContentMaskClassName:"appContentMask appContentMaskOpen",
+          });
+        }
       }else{
         let marginLeft=( collapsed)?minMarginLeft:maxMarginLeft ;
         this.setState({
             collapsed: collapsed,
-            rightLayoutStyle:{animation:animation,marginLeft:marginLeft,animationTimingTunction:'linear'}
+            rightLayoutStyle:{animation:animation,marginLeft:marginLeft,animationTimingTunction:'linear'},
+            appContentMaskClassName:"appContentMask",
         });
       }
   };
@@ -69,6 +78,7 @@ class App extends Component {
           <MainLeftMenu/>
         </Sider>
         <Layout style={this.state.rightLayoutStyle} >
+              <div className={this.state.appContentMaskClassName} onClick={this.toggle}></div>
               <Content className="layoutContent" >
                 <Route exact path={`${this.props.match.path}`} component={Home}/>
                 <Route exact path={`${this.props.match.path}/home`} component={Home}/>

@@ -151,3 +151,21 @@ code {
     padding: 20px 40px 0 40px;
   }
 }
+
+.appContentMask{
+  position:fixed;
+  width:100%;
+  left:0;
+  background-color:rgba(0,0,0,0.45);
+  opacity:0;
+  height: 0%;
+  transition:height 0s ease 0.3s,opacity .3s linear;
+  -webkit-transition:height 0s ease 0.3s,opacity .3s linear;
+  z-index: 5;
+}
+.appContentMask.appContentMaskOpen{
+  transition:height 0s ease, opacity .3s linear;
+  -webkit-transition:height 0s ease, opacity .3s linear;
+  height: 100%;
+  opacity:1;
+}

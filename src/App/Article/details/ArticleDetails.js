@@ -26,8 +26,9 @@ class ArticleDetail extends Component{
             <Card style={{ marginTop: 16,overflow:'hidden'}}>
                 <Skeleton active loading={this.state.loading} style={{height:'800px'}} title={{width:330}} paragraph={{rows:22,width:220}}>
                     <div>
-                        <h1>{this.state.data.name}</h1>
+                        <h1 style={{lineHeight:"40px",fontSize:"30px"}}>{this.state.data.name}</h1>
                         <h4 style={{color:"rgb(158, 171, 179)"}}>{this.state.data.ts}</h4>
+                        <hr/>
                         <p>
                         <ReactMarkdown className="markdown" 
                             source={this.state.data.content} 
