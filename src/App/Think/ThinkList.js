@@ -12,12 +12,16 @@ class ThinkList extends Component{
   }
   getListData=()=>{
       this.setState({loading:{tip:'正在加载...',spinning:true}});
-      WrapFetch.get(`/api/document/findbytype?type=${DocumentType.THINK}`,
-      (data)=>{
+      WrapFetch.get(
+        {
+          url:`/api/document/findByType`,
+          queryParam:{type:DocumentType.THINK}
+        }
+      ).then(
+        (data)=>{
           this.setState({loading:false,list:data});
-      }
+        }
       );
-      
   };
     render(){
 

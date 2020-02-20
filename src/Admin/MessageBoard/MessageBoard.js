@@ -9,18 +9,27 @@ import CodeBlock from '../../Tools/CodeBlock';
 class MessageBoard extends Component{
     
   componentDidMount(){
-    this.getListData();
+    this.onPageChange(1,10);
   };
-  state={list:[],loading:true};
-  getListData=()=>{
-      this.setState({loading:{tip:'正在加载...',spinning:true}});
-      WrapFetch.get(`/api/document/findbytype?type=${DocumentType.MESSAGE}`,
-        (data)=>{
-          this.setState({loading:false,list:data});
-        }
-      );
-      
-  };
+  state={list:[],loading:true, page: 1, pageSize: 10, total: 0 };
+  onPageChange = (page, pageSize) => {
+    this.setState({ loading: { tip: '正在加载...', spinning: true } });
+    WrapFetch.get(
+      {
+        url: `/api/document/findByPageAndType`,
+        queryParam: { type: DocumentType.MESSAGE,page: page-1, pageSize: pageSize }
+      }
+    ).then(
+      (data) => {
+        this.setState({ loading: false, list: data.content, total: data.totalElements, page: data.number+1, pageSize: data.size });
+      }
+    );
+  }
+  onReloadData(){
+    let page=this.state.current;
+    let pageSize=this.state.size;
+    this.onPageChange(page,pageSize);
+  }
     render(){
       let columns = [
         {
@@ -93,9 +102,14 @@ class MessageBoard extends Component{
               e.preventDefault();
               console.log(record);
               this.setState({loading:{tip:'正在删除...',spinning:true}});
-              WrapFetch.get(`/api/document/deletebyid?id=${record.id}`,
+              WrapFetch.get(
+                {
+                  url:`/api/document/deleteById`,
+                  queryParam:{id:record.id}
+                }
+              ).then(
                 (data)=>{
-                  this.getListData();
+                  this.onReloadData();
                 }
               );
             };
@@ -117,7 +131,20 @@ class MessageBoard extends Component{
           },
         },
       ];
-        return (<div><Table columns={columns} dataSource={this.state.list} rowKey="id" loading={this.state.loading}/></div>);
+        return (<div><Table columns={columns} dataSource={this.state.list} rowKey="id" loading={this.state.loading}
+        pagination={
+          {
+            showQuickJumper: true,
+            showSizeChanger: true,
+            pageSizeOptions: ['10', '20', '50', '100', '150', '200'],
+            onChange: this.onPageChange,
+            onShowSizeChange: this.onPageChange,
+            pageSize: this.state.pageSize,
+            current: this.state.page,
+            total: this.state.total
+          }
+        }
+        /></div>);
     };
 }
 

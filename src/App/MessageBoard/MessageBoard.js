@@ -148,7 +148,7 @@ class MessageBoard extends Component {
         markdownPic+="\n![" + file.markdownUseFileName + "](/api/files/" + file.originFileObj.fileMd5+file.name.substr(file.name.lastIndexOf('.')) + ")";
       });
     txtValue+=markdownPic;
-    let url=`/api/document/add_document?type=${DocumentType.MESSAGE}&`+this.changeJSON2QueryString({content:txtValue});
+    let url=`/api/document/addDocument?type=${DocumentType.MESSAGE}&`+this.changeJSON2QueryString({content:txtValue});
     await fetch(url).then(res=>{
       //message.success('成功发表留言');
       this.setState({txtValue:''});
@@ -212,7 +212,7 @@ class MessageBoard extends Component {
 
   };
   getListData= async ()=>{
-  await fetch(`/api/document/findbytype?type=${DocumentType.MESSAGE}`).then(response=>{
+  await fetch(`/api/document/findByType?type=${DocumentType.MESSAGE}`).then(response=>{
       if(response.ok){
           return response.json();
       }else{

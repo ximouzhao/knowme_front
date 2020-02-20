@@ -15,7 +15,12 @@ class ArticleDetail extends Component{
         let patharr=this.props.location.pathname.split('/');
         let id=patharr[patharr.length-1];
         console.log(id);
-        WrapFetch.get(`/api/document/findById?id=${id}`,
+        WrapFetch.get(
+            {
+                url:`/api/document/findById`,
+                queryParam:{id:id}
+            }
+        ).then(
             (data)=>{
                 this.setState({loading:false,data:data});
             }

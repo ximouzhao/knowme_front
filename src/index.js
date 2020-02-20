@@ -6,8 +6,11 @@ import App from './App/App';
 import Admin from './Admin/Admin'
 import { BrowserRouter,Route } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 
 ReactDOM.render(
+    <ConfigProvider locale={zhCN}>
     <BrowserRouter
         /* basename={optionalString}
         forceRefresh={optionalBool}
@@ -16,7 +19,8 @@ ReactDOM.render(
         <Route exact path="/" component={App}/>
         <Route path="/app" component={App}/>
         <Route path="/admin" component={Admin}/>
-    </BrowserRouter>,
+    </BrowserRouter>
+    </ConfigProvider>,
  document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

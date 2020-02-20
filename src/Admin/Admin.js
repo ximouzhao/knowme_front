@@ -9,6 +9,7 @@ import Article from './Article/Article';
 import MessageBoard from './MessageBoard/MessageBoard';
 import NewArticle from './Article/NewArticle';
 
+
 const {Header,Content,Footer,Sider} =Layout;
 const {SubMenu} =Menu;
 const breadcrumbNameMap = {
@@ -16,7 +17,7 @@ const breadcrumbNameMap = {
     'think': '随想管理',
     'article': '文章管理',
     'message':'留言管理',
-    'visitor_log': '访问日志',
+    'visitorLog': '访问日志',
     'newArticle':'写文章'
   };
 const minMarginLeft=0;
@@ -110,8 +111,8 @@ class Admin extends Component{
                             </span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="visitor_log">
-                            <Link to={`${this.props.match.path}/visitor_log`}>
+                        <Menu.Item key="visitorLog">
+                            <Link to={`${this.props.match.path}/visitorLog`}>
                             <span>
                                 <Icon type="file-text" /><span>访问日志</span>
                             </span>
@@ -139,12 +140,13 @@ class Admin extends Component{
                             <Route exact path={`${this.props.match.path}/article`} component={Article}/>
                             <Route exact path={`${this.props.match.path}/article/newArticle`} component={NewArticle}/>
                             <Route exact path={`${this.props.match.path}/message`} component={MessageBoard}/>
-                            <Route exact path={`${this.props.match.path}/visitor_log`} component={VisitorLog}/>
+                            <Route exact path={`${this.props.match.path}/visitorLog`} component={VisitorLog}/>
                         </div>
                     </Content>
                     <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao</Footer>
                 </Layout> 
             </Layout>
+            
         );
     }
 }
