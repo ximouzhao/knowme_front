@@ -7,3 +7,13 @@
     height: auto;
     max-width: 100%;  
 }
+.ant-descriptions-item-label{
+    color:rgba(240, 52, 52, 1)
+}
+.homeH3{
+    color:rgba(0, 0, 0, 0.85);
+    line-height:1.5;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}

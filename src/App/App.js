@@ -87,7 +87,7 @@ class App extends Component {
                 <Route exact path={`${this.props.match.path}/think`} component={ThinkList}/>
                 <Route exact path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
               </Content>
-              <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao</Footer>
+              <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao 京ICP备19037635号-1</Footer>
         </Layout>
     </Layout>
     );
