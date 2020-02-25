@@ -8,20 +8,20 @@ import IconKnowMe from '../../Icon/IconKnowMe';
 
 class MessageContent extends Component{
 
-    componentDidMount(){
-        let width=this.refs.messageContent.scrollWidth;
-        console.log(this.refs.messageContent.scrollWidth);
-        console.log('width='+width);
-        let iframe=this.refs.content.children[1].getElementsByTagName("iframe");
-        if(iframe.length>0){
-            for(var i=0;i<iframe.length;i++){
-                console.log(iframe[i]);
-                iframe[i].style.width=width-120+'px';
-                iframe[i].style.height=(width-120)*9/16+'px';
-            }
-        }
-        //console.log(findDomNode(this.refs.x1));
-    }
+    // componentDidMount(){
+    //     let width=this.refs.messageContent.scrollWidth;
+    //     console.log(this.refs.messageContent.scrollWidth);
+    //     console.log('width='+width);
+    //     let iframe=this.refs.content.children[1].getElementsByTagName("iframe");
+    //     if(iframe.length>0){
+    //         for(var i=0;i<iframe.length;i++){
+    //             console.log(iframe[i]);
+    //             iframe[i].style.width=width-120+'px';
+    //             iframe[i].style.height=(width-120)*9/16+'px';
+    //         }
+    //     }
+    //     //console.log(findDomNode(this.refs.x1));
+    // }
     render(){
         return (
             <div className="messageContent">
