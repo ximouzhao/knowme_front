@@ -36,8 +36,8 @@ class MainLeftMenu extends Component{
                         <Icon type="home" />主页
                       </span>
                     </Link>
-                    
               </Menu.Item>
+              <Menu.Item key="think">
                 <Link to="/app/think">
                 <span>
                       <Icon type="bulb" />
