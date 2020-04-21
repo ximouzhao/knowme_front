@@ -30,7 +30,7 @@ class MainLeftMenu extends Component{
                 openKeys={this.state.openKeys}
                 onOpenChange={this.onOpenChange}
               >
-              <Menu.Item key="1">
+              <Menu.Item key="home">
                     <Link to="/app/home">
                       <span>
                         <Icon type="home" />主页
@@ -38,7 +38,6 @@ class MainLeftMenu extends Component{
                     </Link>
                     
               </Menu.Item>
-              <Menu.Item key="2">
                 <Link to="/app/think">
                 <span>
                       <Icon type="bulb" />
@@ -46,7 +45,7 @@ class MainLeftMenu extends Component{
                     </span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="3">
+              <Menu.Item key="article">
                   <Link to="/app/article">
                     <span>
                       <Icon type="read" />
@@ -54,7 +53,7 @@ class MainLeftMenu extends Component{
                     </span>
                   </Link>
               </Menu.Item>
-              <Menu.Item key="4">
+              <Menu.Item key="github">
                 <a href="https://github.com/ximouzhao" target="_blank" rel="noopener noreferrer">
                     <span>
                       <Icon type="github" />
@@ -62,7 +61,7 @@ class MainLeftMenu extends Component{
                     </span>
                 </a>
               </Menu.Item>
-              <Menu.Item key="5">
+              <Menu.Item key="weibo">
                   <a href="https://www.weibo.com/ximouzhao" target="_blank" rel="noopener noreferrer">
                         <span>
                                 <Icon type="weibo" />
@@ -70,7 +69,7 @@ class MainLeftMenu extends Component{
                         </span>
                   </a>
               </Menu.Item>
-              <Menu.Item key="6">
+              <Menu.Item key="message">
                   <Link to="/app/messageBoard">
                     <span><Icon type="message" />留言</span>
                   </Link>
