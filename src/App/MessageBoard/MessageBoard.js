@@ -40,7 +40,7 @@ class MessageBoard extends Component {
     });
   }
   isEmpty=(str)=>{
-    if(str!= undefined&&str!=null && str.length!=0){
+    if(str!== undefined&&str!==null && str.length!=0){
       return false;
     }else{
       return true;
@@ -86,22 +86,22 @@ class MessageBoard extends Component {
     let markdownUseFileName=filename;
     //markdwown需要转义一些字符
     let parseArr={
-      "\\\\":"\\","\\\`":"\`",
-      "\\\*":"\*","\\\_":"\_",
-      "\\\{":"\{","\\\}":"\}",
-      "\\\[":"\[","\\\]":"\]",
-      "\\\(":"\(","\\\)":"\)",
-      "\\\#":"\#","\\\+":"\+",
-      "\\\-":"\-","\\\!":"\!"
+      "\\\\":"\\","\\`":"`",
+      "\\*":"*","\\_":"_",
+      "\\{":"{","\\}":"}",
+      "\\[":"[","\\]":"]",
+      "\\(":"(","\\)":")",
+      "\\#":"#","\\+":"+",
+      "\\-":"-","\\!":"!"
     };
     for(let key in parseArr){
       let reg=new RegExp(key,"g");
       markdownUseFileName=markdownUseFileName.replace(reg,"\\"+parseArr[key]);
     }
     file.markdownUseFileName=markdownUseFileName;
-    let fileList=this.state.fileList;
+    //let fileList=this.state.fileList;
     if (!file.url ){
-      let spark = new SparkMD5();
+      //let spark = new SparkMD5();
       const reader = new FileReader();
       reader.readAsBinaryString(file);
       reader.onload = function(e){
@@ -242,7 +242,7 @@ class MessageBoard extends Component {
         <Alert message="最多添加9张图片" type="info" />
       </div>
     );
-    const { imageUrl } = this.state;
+    //const { imageUrl } = this.state;
     const { previewVisible, previewImage, fileList,picAddDisabled, btnPublishDisabled} = this.state;
     return (
       <Spin spinning={this.state.loading} tip={this.state.tip}>
