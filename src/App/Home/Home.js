@@ -42,7 +42,7 @@ class Home extends Component{
                     <Descriptions.Item label="个人状态"> <span style={{color:'rgba(46, 204, 113, 1)'}}>求职中...</span></Descriptions.Item>
                     <Descriptions.Item label="毕业院校">西北农林科技大学 16年毕业 (985院校)</Descriptions.Item>
                     <Descriptions.Item label="现居住地">陕西 西安 高新区</Descriptions.Item>
-                    <Descriptions.Item label="邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱">ximouzhao@gmail.com</Descriptions.Item>
+                    <Descriptions.Item label="邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱">ximouzhao@foxmail.com</Descriptions.Item>
                     <Descriptions.Item label="爱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好">
                     各种球类运动，打游戏，写代码，探讨人生...
                     </Descriptions.Item>
