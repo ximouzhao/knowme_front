@@ -39,7 +39,7 @@ class Home extends Component{
                 <Card style={{ marginTop: 16 }} >
                     <h2 style={{textAlign:'center'}}><span style={{color:'rgba(242, 38, 19, 1)',fontWeight:'bold'}}>欢迎来到我的个人网站</span></h2>
                     <Descriptions style={{color:'rgba(0, 181, 204, 1)'}} title="个人信息" layout="horizontal">
-                    <Descriptions.Item label="个人状态"> <span style={{color:'rgba(46, 204, 113, 1)'}}>求职中...</span></Descriptions.Item>
+                    <Descriptions.Item label="个人状态"> <span style={{color:'rgba(46, 204, 113, 1)'}}>就职于格尔软件西安分公司</span></Descriptions.Item>
                     <Descriptions.Item label="毕业院校">西北农林科技大学 16年毕业 (985院校)</Descriptions.Item>
                     <Descriptions.Item label="现居住地">陕西 西安 高新区</Descriptions.Item>
                     <Descriptions.Item label="邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱">ximouzhao@foxmail.com</Descriptions.Item>
