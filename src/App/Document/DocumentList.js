@@ -29,7 +29,6 @@ class Article extends Component{
     render(){
         let articleContents=[];
         this.state.list.forEach((element,index,array)=>{
-        element.content=decodeURIComponent(element.content);
         articleContents.push(<ArticleContent element={element}  key={index}/>)
         });
         return (<div className="articleList">{articleContents}</div>)
