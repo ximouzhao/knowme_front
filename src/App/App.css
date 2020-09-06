@@ -126,6 +126,9 @@ code {
   margin-top: 64px;
   overflow:hidden;
 }
+.loader{
+  text-align: center;
+}
 @media (max-width: 576px) {
   .layoutContent{
     padding: 20px 0 0 0;

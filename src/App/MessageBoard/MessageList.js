@@ -9,7 +9,6 @@ class MessageList extends Component{
         let messageContents=[];
         this.props.list.forEach((element,index,array)=>{
             try{
-                //element.content=decodeURIComponent(element.content);
                 messageContents.push(<MessageContent element={element}  key={index}/>);
             }catch(err){
                 message.error(err+'');
