@@ -31,6 +31,7 @@ class ThinkList extends Component{
               element.content=decodeURIComponent(element.content);
               ThinkContents.push(<ThinkContent element={element}  key={index} loading={this.state.loading}/>);
           }catch(err){
+            console.log("thinklist err",element,index)
               message.error(err+'');
           }
       });
