@@ -171,7 +171,7 @@ class MessageBoard extends Component {
     this.setState({tip:'正在保存留言...'})
     await this.saveDocument(fileList,txtValue);
     this.setState({tip:'正在重新加载...'})
-    await this.getListData();
+    await this.getFirstData();
     this.setState({loading:false})
   }
   showModal =() => {
