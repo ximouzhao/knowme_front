@@ -44,7 +44,6 @@ class Article extends Component {
       return;
     }
     this.setState({
-      hasMore:false,
       pageNum: page
     }, () => {
       this.getMoreData(page); //请求数据接口
