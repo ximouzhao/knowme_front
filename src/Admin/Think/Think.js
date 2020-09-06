@@ -21,6 +21,14 @@ class Think extends Component{
       }
     ).then(
       (data) => {
+        data.content.forEach((element,index,array)=>{
+          try{
+              element.content=decodeURIComponent(element.content);
+          }catch(err){
+            console.log("thinklist decodeURIComponent err",element,index)
+            message.error(err+'');
+          }
+        });
         this.setState({ loading: false, list: data.content, total: data.totalElements, page: data.number+1, pageSize: data.size });
       }
     );
