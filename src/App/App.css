@@ -129,6 +129,9 @@ code {
 .loader{
   text-align: center;
 }
+.end-text{
+  text-align: center;
+}
 @media (max-width: 576px) {
   .layoutContent{
     padding: 20px 0 0 0;

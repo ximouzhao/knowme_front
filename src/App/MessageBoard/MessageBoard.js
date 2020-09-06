@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './MessageBoard.css';
 import { Input , Modal,Upload, message, Button, Icon,Alert ,Spin} from 'antd';
 import MessageList from './MessageList';
+import WrapFetch from '../../Tools/WrapFetch';
 import DocumentType from  '../../Constant/DocumentType';
 import SparkMD5 from 'spark-md5';
+import InfiniteScroll from 'react-infinite-scroller';
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -28,6 +30,12 @@ class MessageBoard extends Component {
     picAddDisabled:false,
     btnPublishDisabled:true,
     modelVisible:false,
+    // start 滚动加载
+    hasMore: true,
+    pageNum: 0,
+    pageSize: 20,
+    total: 0
+    // end
   };
   onRemove=(file)=>{
     this.setState(state => {
@@ -206,27 +214,44 @@ class MessageBoard extends Component {
   };
  
   async componentDidMount(){
-      this.setState({loading:true,tip:'正在加载留言...'})
-      await this.getListData();
-      this.setState({loading:false});
-
+      this.getFirstData();
   };
-  getListData= async ()=>{
-  await fetch(`/api/document/findByType?type=${DocumentType.MESSAGE}`).then(response=>{
-      if(response.ok){
-          return response.json();
-      }else{
-          message.error(response.statusText);
+  getFirstData=  ()=>{
+    this.setState({loading:true,tip:'正在加载留言...'})
+    WrapFetch.get(
+      {
+        url: `/api/document/findByPageAndType`,
+        queryParam: { type: DocumentType.MESSAGE, page: 0, pageSize: this.state.pageSize }
       }
-  }).then(result=>{
-        try{
-          if(result.data){ 
-            this.setState({list:result.data});
-          }
-        }catch(err){
-          console.log(err);
-        }
-    })
+    ).then(
+      (data) => {
+        this.setState({ list: data.content, total: data.totalElements, hasMore: data.totalPages > 1, loading: false });
+      }
+    );
+  }
+  // 获取下一页信息
+  getMore = (page) => {
+    console.log("getmore",page)
+    if (this.state.total === this.state.list.length) {
+      return;
+    }
+    this.setState({
+      pageNum: page
+    }, () => {
+      this.getMoreData(page); //请求数据接口
+    });
+  }
+  getMoreData = (page) => {
+    WrapFetch.get(
+      {
+        url: `/api/document/findByPageAndType`,
+        queryParam: { type: DocumentType.MESSAGE, page: page, pageSize: this.state.pageSize }
+      }
+    ).then(
+      (data) => {
+        this.setState({ list: this.state.list.concat(data.content), total: data.totalElements, hasMore: data.totalPages > page+1});
+      }
+    );
   };
   render() {
     const { TextArea } = Input;
@@ -268,7 +293,20 @@ class MessageBoard extends Component {
                     </Modal>
                   </div>
             </div>
-                <MessageList list={this.state.list}/>
+            <InfiniteScroll
+              className="list-contents"
+              initialLoad={false}
+              pageStart={0}
+              loadMore={this.getMore.bind(this)}
+              threshold={800}
+              hasMore={this.state.hasMore}
+              useWindow={true}
+              loader={<div className="loader" key={0}>Loading ...</div>}
+            >
+                    <MessageList list={this.state.list}/>
+              {/* Tip:内部元素不要加高度以及overflow:auto等属性！！！！ */}
+              {!this.state.hasMore ? <div className="end-text">-------- 你已经看完所有的留言啦 --------</div> : ""}
+            </InfiniteScroll>
           <Modal
             visible={this.state.modelVisible}
             title="Title"
