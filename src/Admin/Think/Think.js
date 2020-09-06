@@ -24,9 +24,9 @@ class Think extends Component{
         data.content.forEach((element,index,array)=>{
           try{
               element.content=decodeURIComponent(element.content);
+
           }catch(err){
-            console.log("thinklist decodeURIComponent err",element,index)
-            message.error(err+'');
+            console.log("thinklist decodeURIComponent err",element,index)            message.error(err+'');
           }
         });
         this.setState({ loading: false, list: data.content, total: data.totalElements, page: data.number+1, pageSize: data.size });
@@ -103,7 +103,11 @@ class Think extends Component{
               e.preventDefault();
               console.log(record);
               this.setState({loading:{tip:'正在删除...',spinning:true}});
-              WrapFetch.get(`/api/document/deleteById?id=${record.id}`,
+              WrapFetch.get({
+                url: `/api/document/deleteById`,
+                queryParam: { id: record.id},
+                successStr: '删除成功'
+                },
                 (data)=>{
                   this.getListData();
                 }
