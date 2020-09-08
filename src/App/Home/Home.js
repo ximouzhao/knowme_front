@@ -85,7 +85,9 @@ class Home extends Component{
                             <br/>4.显示文章阅读数
                             <br/>5.点赞评论功能
                         </Timeline.Item>
-                        <Timeline.Item>优化在移动端设备显示</Timeline.Item>
+                        <Timeline.Item color="green">实现后台逻辑删除</Timeline.Item>
+                        <Timeline.Item color="blue">实现滚动热加载</Timeline.Item>
+                        <Timeline.Item color="red">优化在移动端设备显示</Timeline.Item>
                         <Timeline.Item color="green">实现后台新增文章的功能</Timeline.Item>
                         <Timeline.Item color="blue">
                         确定前台页面，增加后台管理页面

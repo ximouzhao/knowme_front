@@ -109,7 +109,8 @@ class MessageBoard extends Component{
                 }
               ).then(
                 (data)=>{
-                  this.onReloadData();
+                  this.onPageChange(this.state.page,this.state.pageSize);
+                  this.setState({loading:false});
                 }
               );
             };

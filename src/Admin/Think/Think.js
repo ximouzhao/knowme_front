@@ -85,25 +85,21 @@ class Think extends Component{
             let handleUpdate = (e)=>  {
               e.preventDefault();
               console.log(record);
-              // WrapFetch.get(`/api/document/updateById?id=${record.id}`,
-              //   (data)=>{
-              //     this.setState({loading:false,list:data});
-              //   }
-              // );
             };
             let handleDelete = (e)=>  {
               e.preventDefault();
-              console.log(record);
               this.setState({loading:{tip:'正在删除...',spinning:true}});
+              debugger
               WrapFetch.get({
                 url: `/api/document/deleteById`,
                 queryParam: { id: record.id},
                 successStr: '删除成功'
-                },
-                (data)=>{
-                  this.getListData();
                 }
-              );
+              ).then((data)=>{
+                debugger
+                this.onPageChange(this.state.page,this.state.pageSize);
+                this.setState({loading:false});
+              });
             };
             return (
               <span>

@@ -95,13 +95,13 @@ class Article extends Component{
             };
             let handleDelete = (e)=>  {
               e.preventDefault();
-              console.log(record);
               this.setState({loading:{tip:'正在删除...',spinning:true}});
               WrapFetch.get(
                 {url:'/api/document/deleteById',queryParam:{id:record.id}}
               ).then(
                 (data)=>{
-                  this.getListData();
+                  this.onPageChange(this.state.page,this.state.pageSize);
+                  this.setState({loading:false});
                 }
               );
             };
