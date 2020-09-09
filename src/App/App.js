@@ -6,6 +6,7 @@ import MessageBoard from './MessageBoard/MessageBoard';
 //import Header from './Header/Header';
 import { BrowserRouter,Route,withRouter } from 'react-router-dom';
 import Home from './Home/Home';
+import MySearch from './MySearch/MySearch';
 import ArticleList from './Article/ArticleList';
 import ArticleDetails from './Article/details/ArticleDetails';
 import ThinkList from './Think/ThinkList';
@@ -86,6 +87,7 @@ class App extends Component {
                 <Route path={`${this.props.match.path}/article/details`} component={ArticleDetails}/>
                 <Route exact path={`${this.props.match.path}/think`} component={ThinkList}/>
                 <Route exact path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
+                <Route exact path={`${this.props.match.path}/search`} component={MySearch}/>
               </Content>
               <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao 京ICP备19037635号-1</Footer>
         </Layout>

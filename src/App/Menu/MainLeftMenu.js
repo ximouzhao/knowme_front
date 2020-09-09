@@ -75,6 +75,12 @@ class MainLeftMenu extends Component{
                   </Link>
                     
               </Menu.Item>
+              <Menu.Item key="search">
+                  <Link to="/app/search">
+                    <span><Icon type="search" />Search</span>
+                  </Link>
+                    
+              </Menu.Item>
               </Menu>
           </Layout>);
     }
