@@ -80,11 +80,11 @@ class Home extends Component{
                         <Timeline.Item dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />}>
                             待办事项：
                             <br/>1.登录管理，需要支持Github登录
-                            <br/>2.前台搜索功能
-                            <br/>3.文章支持锚点
-                            <br/>4.显示文章阅读数
-                            <br/>5.点赞评论功能
+                            <br/>2.文章支持锚点
+                            <br/>3.显示文章阅读数
+                            <br/>4.点赞评论功能
                         </Timeline.Item>
+                        <Timeline.Item color="red">前台搜索功能</Timeline.Item>
                         <Timeline.Item color="green">实现后台逻辑删除</Timeline.Item>
                         <Timeline.Item color="blue">实现滚动热加载</Timeline.Item>
                         <Timeline.Item color="red">优化在移动端设备显示</Timeline.Item>
