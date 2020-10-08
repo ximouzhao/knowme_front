@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import './MySearch.css';
 import moment from 'moment'; 
-import { Icon, Card, List, Descriptions, Typography } from 'antd';
+import { Icon, Card, List, Descriptions, Typography ,Spin} from 'antd';
 import WrapFetch from '../../Tools/WrapFetch';
 import SearchResult from './SearchResult';
 import { Input } from 'antd';
 const { Search } = Input;
 class MySearch extends Component {
     state = {
+        isShowImg: true,
+        loading:false,
+        tip: "正在查询",
         list: [],
         text: "",
         // start 滚动加载
@@ -16,9 +20,12 @@ class MySearch extends Component {
         total: 0
         // end
     };
+    onSearchChange=(value)=>{
+        console.log(value)
+    }
     onSearchClick = (value) => {
         console.log(value)
-        this.setState({ text: value,list: [] },this.getMore)
+        this.setState({ text: value,list: [] ,loading:true,isShowImg:false},this.getMore)
     };
     getMore=()=> {
         WrapFetch.get(
@@ -42,10 +49,14 @@ class MySearch extends Component {
         });
         return (
             <div>
-                <Card>
-                    <Search placeholder="" onSearch={value => this.onSearchClick(value)} enterButton />
-                </Card>
-                {SearchResults}
+                <Search size="large" className={this.state.isShowImg?"search_normal":"search_hidden_img"} 
+                placeholder="" onSearch={value => this.onSearchClick(value)} enterButton
+                 onChange={this.onSearchChange}/>
+                    <img className={this.state.isShowImg?"search_img_normal":"search_img_hidden"}
+                     src="/api/files/wallhaven-2em38y_3840x2160.png"/>
+                <Spin spinning={this.state.loading} tip={this.state.tip}>
+                    {SearchResults}
+                </Spin>
             </div>
         );
     }
