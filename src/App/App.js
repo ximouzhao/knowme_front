@@ -11,6 +11,8 @@ import ArticleList from './Article/ArticleList';
 import ArticleDetails from './Article/details/ArticleDetails';
 import ThinkList from './Think/ThinkList';
 import logopng from '../resource/logo.486a892c.png';
+import { PhotoProvider } from 'react-photo-view';
+import 'react-photo-view/dist/index.css';
 
 const {Header,Content,Footer,Sider} =Layout;
 const minMarginLeft=0;
@@ -80,6 +82,7 @@ class App extends Component {
         </Sider>
         <Layout style={this.state.rightLayoutStyle} >
               <div className={this.state.appContentMaskClassName} onClick={this.toggle}></div>
+              <PhotoProvider>
               <Content className="layoutContent" >
                 <Route exact path={`${this.props.match.path}`} component={Home}/>
                 <Route exact path={`${this.props.match.path}/home`} component={Home}/>
@@ -89,6 +92,7 @@ class App extends Component {
                 <Route exact path={`${this.props.match.path}/messageBoard`} component={MessageBoard}/>
                 <Route exact path={`${this.props.match.path}/search`} component={MySearch}/>
               </Content>
+              </PhotoProvider>
               <Footer style={{textAlign:'center'}}>Ximou Zhao ©2019 Created by Ximou Zhao 京ICP备19037635号-1</Footer>
         </Layout>
     </Layout>
