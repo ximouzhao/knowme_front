@@ -3,6 +3,7 @@ import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
 import IconKnowMe from '../../Icon/IconKnowMe';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../Tools/CodeBlock';
+import ImageBlock from '../../Tools/ImageBlock';
 const { Meta } = Card;
 
 
@@ -22,7 +23,7 @@ class ThinkContent extends Component{
                 description={<ReactMarkdown className="markdown" 
                 source={this.props.element.content} 
                 escapeHtml={false} 
-                renderers={{ code: CodeBlock }}/>}
+                renderers={{ code: CodeBlock,image:ImageBlock }}/>}
               /> 
               
             </Skeleton>

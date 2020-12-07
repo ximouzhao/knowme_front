@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../Tools/CodeBlock';
+import ImageBlock from '../../Tools/ImageBlock';
 import { Icon } from 'antd';
 import './MessageContent.css';
 import headPtoto from '../../resource/head_photo.png';
@@ -31,7 +32,8 @@ class MessageContent extends Component{
                         <div className="name">{this.props.element.id}</div>
                         <div className="time">{this.props.element.ts}</div>
                     </div>
-                    <ReactMarkdown className="markdown" source={this.props.element.content}  escapeHtml={false} renderers={{ code: CodeBlock }}/>
+                    <ReactMarkdown className="markdown" source={this.props.element.content}  escapeHtml={false}
+                     renderers={{ code: CodeBlock,image:ImageBlock }}/>
                 </div>
                 <div className="handle">
                     <div className="comment"><IconKnowMe type="iconcomment" />  评论</div>

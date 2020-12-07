@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../Tools/CodeBlock';
+import ImageBlock from '../../Tools/ImageBlock';
 
 const { Meta } = Card;
 
@@ -24,7 +25,7 @@ class ArticleContent extends Component{
                     <ReactMarkdown className="markdown" 
                         source={this.props.element.content.substring(0, 200)} 
                         escapeHtml={false} 
-                        renderers={{ code: CodeBlock }}/>
+                        renderers={{ code: CodeBlock,image:ImageBlock }}/>
                         <Link to={this.props.location+`/details/${this.props.element.id}`}>阅读全文</Link>
                     </p>
                 </div>
