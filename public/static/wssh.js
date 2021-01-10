@@ -45,7 +45,7 @@ WSSHClient.prototype._generateEndpoint = function(options) {
     } else {
         var protocol = 'ws://';
     }
-    var endpoint = protocol + window.location.host +
+    var endpoint = protocol + "home.ximouzhao.com:5000" +
         '/wssh/' + encodeURIComponent(options.hostname) + '/' +
         encodeURIComponent(options.username);
     if (options.authentication_method == 'password') {
