@@ -40,11 +40,11 @@ function WSSHClient() {
 };
 
 WSSHClient.prototype._generateEndpoint = function(options) {
-    if (window.location.protocol == 'https:') {
-        var protocol = 'wss://';
-    } else {
+    //if (window.location.protocol == 'https:') {
+    //    var protocol = 'wss://';
+    //} else {
         var protocol = 'ws://';
-    }
+    //}
     var endpoint = protocol + "home.ximouzhao.com:5000" +
         '/wssh/' + encodeURIComponent(options.hostname) + '/' +
         encodeURIComponent(options.username);
