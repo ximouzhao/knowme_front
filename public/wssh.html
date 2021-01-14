@@ -6,6 +6,7 @@
 
         <link href="./static/bootstrap.min.css" rel="stylesheet" />
         <link href="./static/style.css" rel="stylesheet" />
+		<link href="./static/xterm.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -137,19 +138,34 @@
 
         <script type="application/javascript" src="./static/jquery.min.js">
         </script>
-        <script type="application/javascript" src="./static/term.js">
+        <script type="application/javascript" src="./static/xterm.js">
         </script>
         <script type="application/javascript" src="./static/wssh.js">
         </script>
         <script type="application/javascript">
             function openTerminal(options) {
                 var client = new WSSHClient();
-                var term = new Terminal(80, 24, function(key) {
-                    client.send(key);
-                });
-                term.open();
-                $('.terminal').detach().appendTo('#term');
-                term.resize(80, 24);
+				//计算控制台的高度和宽度
+				$width = $('.container').width();
+				$height = $('.container').height();
+				var term=new Terminal({
+					screenKeys: true,
+					useStyle: true,
+					cursorBlink: true,
+					convertEol: true
+				  });
+                //var term = new Terminal(80, 24, function(key) {
+                //    client.send(key);
+                //});
+                term.open(document.getElementById('term'));
+				//term.on('data',function(data){
+				//	client.send(data);
+				//});
+				term.onData((key, ev) => {
+						client.send(key);
+				});
+				//term.resize(800,300);
+                //$('.terminal').detach().appendTo('#term');
                 term.write('Connecting...');
                 client.connect($.extend(options, {
                     onError: function(error) {
