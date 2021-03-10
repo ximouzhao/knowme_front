@@ -2,7 +2,6 @@ import 'react-app-polyfill/ie9';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App/App';
 import Admin from './Admin/Admin'
 import { BrowserRouter,Route } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
@@ -16,9 +15,7 @@ ReactDOM.render(
         forceRefresh={optionalBool}
         getUserConfirmation={optionalFunc}
         keyLength={optionalNumber} */>
-        <Route exact path="/" component={App}/>
-        <Route path="/app" component={App}/>
-        <Route path="/admin" component={Admin}/>
+        <Route exact path="/" component={Admin}/>
     </BrowserRouter>
     </ConfigProvider>,
  document.getElementById('root'));
