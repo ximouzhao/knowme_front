@@ -1,13 +1,12 @@
 import 'react-app-polyfill/ie9';
 import ReactDOM from 'react-dom';
+import {Layout,Menu,Breadcrumb,Icon,BackTop,ConfigProvider} from 'antd';
 import React, { Component } from 'react';
-import './index.css';
-import { BrowserRouter,Route,Link,withRouter } from 'react-router-dom'
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter,Route,Link } from 'react-router-dom'
 import zhCN from 'antd/es/locale/zh_CN';
-import { ConfigProvider } from 'antd';
 
-import {Layout,Menu,Breadcrumb,Icon,BackTop} from 'antd';
+import * as serviceWorker from './serviceWorker';
+import './index.css';
 import VisitorLog from './VisitorLog/VisitorLog';
 import Home from './Home/Home';
 import Think from './Think/Think';
