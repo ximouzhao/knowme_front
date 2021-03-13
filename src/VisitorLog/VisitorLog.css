@@ -1,0 +1,9 @@
+@import '~antd/dist/antd.css';
+
+  .VisitorLogList{
+    background:none;
+    
+    text-align: center;
+    background-color:#fff;
+    background-image:none;
+  } 
