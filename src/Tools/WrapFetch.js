@@ -30,7 +30,7 @@ let WrapFetch ={
                     if(!json){
                         return ;
                     }
-                    if(json.code!=='0'){
+                    if(json.code!==0){
                         message.error(json.msg);
                     }else{
                         if(successStr){
